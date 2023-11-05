@@ -20,7 +20,13 @@ public class TrainController {
         @Path("/filter")
         @Produces("application/json")
         public Response getTrainFilter(@QueryParam("departure")String departure,@QueryParam("arrival")String arrival, @QueryParam("date")String date, @QueryParam("time")String time) {
-                return Response.status(200).entity(trainRepo.getTrainFilter(departure,arrival,date,time)).build();
+
+                TrainList trainList = trainRepo.getTrainFilter(departure,arrival,date,time);
+
+                if (trainList.getTrains().isEmpty()) {
+                        return Response.status(404).entity("No train found").build();
+                }
+                return Response.status(200).entity(trainList).build();
         }
 
 

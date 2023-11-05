@@ -14,7 +14,7 @@ public class DbConnectionManager {
         this.dataSource = (DataSource) ctx.lookup("jdbc/train");
     }
 
-    public Statement createStatement(String sql) throws SQLException {
+    public Statement createStatement() throws SQLException {
         try (Connection connection = dataSource.getConnection()) {
              Statement statement = connection.createStatement();
              return statement;
