@@ -1,6 +1,7 @@
 package com.example.restapi.train;
 
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.Response;
 
 import java.util.List;
 
@@ -11,15 +12,15 @@ public class TrainController {
         @GET
         @Path("/all")
         @Produces("application/json")
-        public List<Train> getAllTrain() {
-                return trainRepo.getAll();
+        public Response getAllTrain() {
+                return Response.status(200).entity(trainRepo.getAll()).build();
         }
 
         @GET
         @Path("/filter")
         @Produces("application/json")
-        public List<Train> getTrainFilter(@QueryParam("departure")String departure,@QueryParam("arrival")String arrival, @QueryParam("date")String date, @QueryParam("time")String time) {
-                return trainRepo.getTrainFilter(departure, arrival, date, time);
+        public Response getTrainFilter(@QueryParam("departure")String departure,@QueryParam("arrival")String arrival, @QueryParam("date")String date, @QueryParam("time")String time) {
+                return Response.status(200).entity(trainRepo.getTrainFilter(departure,arrival,date,time)).build();
         }
 
 
